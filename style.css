@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css?family=Inter');
+
+p,a,li,ol,ul,div,span{
+    font-family: "Inter";
+}
+
+nav a {
+    color: #757ea0;
+    text-decoration: none;
+    transition: 0.3s ease; 
+    padding: 0.5rem 0.8rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    border-radius: 0.3rem;
+    font-weight: 800;
+    font-size: 1.6rem;
+}
+
+nav a:hover {
+    color: #bac4ec;
+    border-color: transparent;
+    border-radius: 0.8rem;
+
+}
+
+.top-bar{
+    background-color: #0b1324;
+    position: fixed;
+    padding: 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index:1000;
+}
+
+body {
+    /*background-color: rgb(219, 216, 216)*/
+    background-color: rgb(190, 189, 189)
+}
+
+.page-links {
+  float: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.introduction{
+    padding: auto;
+    position: relative;
+    left: 30%;
+    z-index: 500;
+}
+
+.main-page{
+    margin-top: 5rem;
+    padding: auto;
+    position: relative;
+    
+    z-index: 500;
+}
+
+
+.main-content{
+    top: 4rem;
+    padding: auto;
+    position: relative;
+    overflow: hidden; /* Add this line */
+    z-index: 500;
+}
+
+.hello-img {
+    position: relative;
+    top: 9rem;
+    left: -15%;
+    width: auto;
+    height: 30rem; /* Adjust the height to take into account the navigation bar */
+    z-index: 0; /* Lower z-index than the top-bar */
+    
+}
+
+.headshot-img {
+    position: relative;
+    top: 5rem;
+    left: -12%;
+    border-radius: 10%;
+    width: auto;
+    height: 30rem; /* Adjust the height to take into account the navigation bar */
+    z-index: 0; /* Lower z-index than the top-bar */
+}
+
+
+.home-page-top-line {
+    border: none;
+    border-top: 3px solid black;
+    color: #0b1324;
+    overflow: visible;
+    text-align: center;
+    height: 5px;
+    margin-top:5rem;
+    box-sizing: border-box; /* Add this line */
+    width: 100%; /* Add this line */
+}
+
+
+.about-img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: calc(100vh - 4rem); /* Adjust the height to take into account the navigation bar */
+    z-index: 0; /* Lower z-index than the top-bar */
+}
+
+@media (max-width: 1500px) {
+    .about-img {
+        transform: translateX(calc((100vw - 1500px) * -0.4));
+    }
+}
+
+/*
+@media (max-width: 1080px) {
+    .about-img {
+        opacity: clamp(0.2, calc(100vw / 1080), 1);
+    }
+}
+*/
