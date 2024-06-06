@@ -3,10 +3,9 @@
 p,a,li,ol,ul,div,span{
     font-family: "Inter";
 }
-
+/*
 nav a {
-    color: #757ea0;
-    text-decoration: none;
+    text-align: center;
     transition: 0.3s ease; 
     padding: 0.5rem 0.8rem;
     margin-left: 0.5rem;
@@ -16,18 +15,47 @@ nav a {
     font-size: 1.6rem;
 }
 
+*/
+nav a {
+    color: #757ea0;
+    text-decoration: none;
+}
+
 nav a:hover {
     color: #bac4ec;
     border-color: transparent;
-    border-radius: 0.8rem;
+}
 
+li a:hover {
+    background-color: #757ea0;
+
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+li a {
+    display: inline-block;
+    text-align: center;
+    padding: 25px 30px;
+    font-weight: 600;
+    font-size: 1.4rem;
+}
+
+li {
+    display: inline;
 }
 
 .top-bar{
     background-color: #0b1324;
     position: fixed;
-    padding: 2.5rem;
-    display: flex;
+    /*padding: 1.5rem;*/
     justify-content: space-between;
     align-items: center;
     width: 100%;
@@ -36,24 +64,26 @@ nav a:hover {
     z-index:1000;
 }
 
+/*
+.page-links {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+*/
+  
 body {
     /*background-color: rgb(219, 216, 216)*/
-    background-color: rgb(190, 189, 189)
+    background-color: rgb(190, 189, 189);
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    width: 100%; /* Ensure width does not exceed viewport */
+    /*box-sizing: border-box; /* Ensure padding and border are included in element's total width */
 }
-
-.page-links {
-  float: none;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
 
 .introduction{
     padding: auto;
     position: relative;
-    left: 30%;
     z-index: 500;
 }
 
@@ -61,25 +91,22 @@ body {
     margin-top: 5rem;
     padding: auto;
     position: relative;
-    
     z-index: 500;
 }
 
 
 .main-content{
-    top: 4rem;
     padding: auto;
     position: relative;
-    overflow: hidden; /* Add this line */
+    overflow: hidden;
     z-index: 500;
 }
 
 .hello-img {
     position: relative;
-    top: 9rem;
-    left: -15%;
+    top: 5rem;
     width: auto;
-    height: 30rem; /* Adjust the height to take into account the navigation bar */
+    height: 25rem; /* Adjust the height to take into account the navigation bar */
     z-index: 0; /* Lower z-index than the top-bar */
 
 }
@@ -94,11 +121,7 @@ body {
     z-index: 0; /* Lower z-index than the top-bar */
 }
 
-@media (max-width: 480px) {
-    .headshot-img  {
-        display: none;
-    }
-}
+
 
 .home-page-top-line {
     border: none;
@@ -119,13 +142,23 @@ body {
     right: 0;
     bottom: 0;
     width: auto;
-    height: calc(100vh - 4rem); /* Adjust the height to take into account the navigation bar */
+    height: calc(100vh - 25px); /* Adjust the height to take into account the navigation bar */
     z-index: 0; /* Lower z-index than the top-bar */
 }
+
 
 @media (max-width: 480px) {
     .about-img  {
         display: none;
+    }
+    .headshot-img  {
+        display: none;
+    }
+    .hello-img  {
+        margin-left: 0;
+        margin-right: 0;
+        display: block;
+        margin: auto;
     }
 }
 
