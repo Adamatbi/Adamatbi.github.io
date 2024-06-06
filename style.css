@@ -81,7 +81,7 @@ body {
     width: auto;
     height: 30rem; /* Adjust the height to take into account the navigation bar */
     z-index: 0; /* Lower z-index than the top-bar */
-    
+
 }
 
 .headshot-img {
@@ -94,6 +94,11 @@ body {
     z-index: 0; /* Lower z-index than the top-bar */
 }
 
+@media (max-width: 480px) {
+    .headshot-img  {
+        display: none;
+    }
+}
 
 .home-page-top-line {
     border: none;
@@ -116,6 +121,12 @@ body {
     width: auto;
     height: calc(100vh - 4rem); /* Adjust the height to take into account the navigation bar */
     z-index: 0; /* Lower z-index than the top-bar */
+}
+
+@media (max-width: 480px) {
+    .about-img  {
+        display: none;
+    }
 }
 
 @media (max-width: 1500px) {
