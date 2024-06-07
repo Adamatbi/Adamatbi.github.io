@@ -3,19 +3,7 @@
 p,a,li,ol,ul,div,span{
     font-family: "Inter";
 }
-/*
-nav a {
-    text-align: center;
-    transition: 0.3s ease; 
-    padding: 0.5rem 0.8rem;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-    border-radius: 0.3rem;
-    font-weight: 800;
-    font-size: 1.6rem;
-}
 
-*/
 nav a {
     color: #757ea0;
     text-decoration: none;
@@ -103,10 +91,52 @@ body {
 .hello-img {
     position: relative;
     top: 5rem;
-    width: auto;
-    height: 25rem; /* Adjust the height to take into account the navigation bar */
+    width: calc(min(40rem, 100%));
+    margin-left: 20%;
+    height:auto;
+    /*height: 25rem; /* Adjust the height to take into account the navigation bar */
     z-index: 0; /* Lower z-index than the top-bar */
 
+}
+
+.projects-page {
+    background-color:  rgb(179, 178, 178);
+    box-shadow: 0 0 10px 10px rgba(179, 178, 178, 0.5);
+    margin-top: 68px;
+    width: min(55rem,100%);
+    position: absolute;
+    left:50%;
+    transform: translateX(-50%);
+    top:0;
+    bottom:0;
+}
+
+.projects-header{
+    color:#0b1324;
+    margin-left:5rem;
+    margin-top:4rem;
+}
+
+.project-page-top-line {
+    color:#0b1324;
+    border-top:3px solid #0b1324;
+    border-bottom: None;
+}
+
+.project-box {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px 0;
+    background-color: #f9f9f9;
+}
+.project-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+.project-description {
+    font-size: 1em;
+    color: #555;
 }
 
 .headshot-img {
@@ -163,13 +193,4 @@ body {
     .about-img {
         transform: translateX(calc((100vw - 1500px) * -0.4));
     }
-
 }
-
-/*
-@media (max-width: 1080px) {
-    .about-img {
-        opacity: clamp(0.2, calc(100vw / 1080), 1);
-    }
-}
-*/
