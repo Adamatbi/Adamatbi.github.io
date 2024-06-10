@@ -1,12 +1,23 @@
 @import url('https://fonts.googleapis.com/css?family=Inter');
 
+:root {
+    --primary-color: #0b1324;
+    --secondary-color: #757ea0;
+    --tertiary-color: #bac4ec;
+    --quaternary-color: #9f9fa1;
+    --quinary-color: #818181;
+    --senary-color: #555;
+}
+
+
 p,a,li,ol,ul,div,span{
     font-family: "Inter";
 }
 
 nav a {
-    color: #757ea0;
+    color: var (--tertiary-color);
     text-decoration: none;
+    transition: 0.2s ease;
 }
 
 nav a:hover {
@@ -124,11 +135,19 @@ body {
 }
 
 .project-box {
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    border: 2px solid #818181;
+    border-radius: 3px;
     padding: 20px;
-    margin: 20px 0;
-    background-color: #f9f9f9;
+    margin: 20px 20px;
+    background-color: #9f9fa1;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: 0.3s ease;
+}
+
+.project-box:hover {    
+    border: 2px solid #0b1324;
 }
 .project-title {
     font-size: 1.5em;
@@ -137,6 +156,34 @@ body {
 .project-description {
     font-size: 1em;
     color: #555;
+}
+
+.article-page {
+    background-color:  rgb(179, 178, 178);
+    box-shadow: 0 0 10px 10px rgba(179, 178, 178, 0.5);
+    margin-top: 68px;
+    width: min(55rem,100%);
+    position: absolute;
+    left:50%;
+    transform: translateX(-50%);
+    top:0;
+    bottom:0;
+}
+
+.article-header{
+    color:#0b1324;
+    margin-top:4rem;
+    text-align: center;
+}
+
+.article-page-top-line {
+    color:#0b1324;
+    border-top:3px solid #0b1324;
+    border-bottom: None;
+}
+
+.article-inner-title {
+    margin-left:3rem;
 }
 
 .headshot-img {
@@ -186,6 +233,11 @@ body {
         margin-right: 0;
         display: block;
         margin: auto;
+    }
+    .projects-header{
+        color:#0b1324;
+        text-align: center;
+        margin-top:4rem;
     }
 }
 
