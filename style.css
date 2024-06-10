@@ -1,12 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Inter');
 
 :root {
-    --primary-color: #0b1324;
-    --secondary-color: #757ea0;
-    --tertiary-color: #bac4ec;
-    --quaternary-color: #9f9fa1;
-    --quinary-color: #818181;
-    --senary-color: #555;
+    --background-color:#bebdbd;
+    --dark-blue: #0b1324;
+    --medium-blue: #757ea0;
+    --light-blue: #bac4ec;
 }
 
 
@@ -15,18 +13,18 @@ p,a,li,ol,ul,div,span{
 }
 
 nav a {
-    color: var (--tertiary-color);
+    color: var(--light-blue);
     text-decoration: none;
     transition: 0.2s ease;
 }
 
 nav a:hover {
-    color: #bac4ec;
+    color: var(--light-blue);
     border-color: transparent;
 }
 
 li a:hover {
-    background-color: #757ea0;
+    background-color: var(--medium-blue);
 
 }
 
@@ -52,7 +50,7 @@ li {
 }
 
 .top-bar{
-    background-color: #0b1324;
+    background-color:  var(--dark-blue);
     position: fixed;
     justify-content: space-between;
     align-items: center;
@@ -73,7 +71,7 @@ li {
   
 body {
     /*background-color: rgb(219, 216, 216)*/
-    background-color: rgb(190, 189, 189);
+    background-color: var(--background-color);
     overflow-x: hidden; /* Hide horizontal scrollbar */
     width: 100%; /* Ensure width does not exceed viewport */
     /*box-sizing: border-box; /* Ensure padding and border are included in element's total width */
@@ -123,14 +121,14 @@ body {
 }
 
 .projects-header{
-    color:#0b1324;
+    color: var(--dark-blue);
     margin-left:5rem;
     margin-top:4rem;
 }
 
 .project-page-top-line {
-    color:#0b1324;
-    border-top:3px solid #0b1324;
+    color: var(--dark-blue);
+    border-top:3px solid  var(--dark-blue);
     border-bottom: None;
 }
 
@@ -147,7 +145,7 @@ body {
 }
 
 .project-box:hover {    
-    border: 2px solid #0b1324;
+    border: 2px solid  var(--dark-blue);
 }
 .project-title {
     font-size: 1.5em;
@@ -171,14 +169,14 @@ body {
 }
 
 .article-header{
-    color:#0b1324;
+    color: var(--dark-blue);
     margin-top:4rem;
     text-align: center;
 }
 
 .article-page-top-line {
-    color:#0b1324;
-    border-top:3px solid #0b1324;
+    color: var(--dark-blue);
+    border-top:3px solid  var(--dark-blue);
     border-bottom: None;
 }
 
@@ -200,7 +198,7 @@ body {
 .home-page-top-line {
     border: none;
     border-top: 3px solid black;
-    color: #0b1324;
+    color:  var(--dark-blue);
     overflow: visible;
     text-align: center;
     height: 5px;
@@ -235,7 +233,7 @@ body {
         margin: auto;
     }
     .projects-header{
-        color:#0b1324;
+        color: var(--dark-blue);
         text-align: center;
         margin-top:4rem;
     }
