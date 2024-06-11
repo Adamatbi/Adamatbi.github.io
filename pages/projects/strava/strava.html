@@ -4,16 +4,16 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Adam Atbi</title>
-        <link rel="stylesheet" href="../../style.css">
+        <link rel="stylesheet" href="../../../style.css">
     </head>
     
     <body>
         <div class="top-bar">
             <nav class="page-links">
                 <ul>
-                    <li><a href="../../index.html">Home</a></li>
-                    <li><a href="../projects.html">Projects</a></li>
-                    <li><a href="../about.html">About Me</a></ul></li>
+                    <li><a href="../../../../index.html">Home</a></li>
+                    <li><a href="../../projects.html">Projects</a></li>
+                    <li><a href="../../about.html">About Me</a></ul></li>
                 </ul>
             </nav>
         </div>
@@ -24,16 +24,27 @@
             </div>
             <hr class="article-page-top-line">
             
-            <div class="article-content">
+            <article class="article-content">
                 <h3 class="article-inner-title">Strava and privacy</h3>
 
                 <p>    As I embarked on training for a charity run with friends, I turned to the fitness app Strava to log my runs. Strava enables users to record and share their activity metrics, including location details, in a social media format with friends and the wider community. However, Strava has faced scrutiny from privacy advocates, notably in 2018 when it inadvertently exposed secret military bases' locations and again in 2023 when its heatmap feature was found to leak users’ home address locations.
-                    
+                    <br><br>
                     To protect users, Strava introduced a feature that allows them to obfuscate their home addresses by creating "hidden zones" around them. Initially, these were perfect circles centered on the addresses. A 2018 study by Hassan et al. demonstrated that this method left users vulnerable—by identifying the edges of a hidden zone, one could pinpoint the address. In response, Strava included a randomly generated offset to the hidden zone to eliminate this attack. A bad actor using this method could still determine the contours of the hidden zone but would be unable to gain information on the exact location of the protected address within it. 
+                </p>
+                <figure>
+                    <img src="hiddenzone.png" alt="" class="article-image">
+                    <figcaption>Offset hidden zone of testing location.</figcaption>
+                </figure>
+                <h3 class="article-inner-title">Vulnerability</h3>
+                <p>
+                    During a run, I devised a potential method allowing a malicious actor to discern the location of a protected address within a "hidden zone”. This attack necessitates only information that is publicly displayed about an activity and may require minimal data points.
+                    <br><br>
+                    The vulnerability originates from Strava's practice of displaying the total length of an activity with 10-meter precision while keeping a part of it hidden from viewers. Let's denote DT as the total distance of an activity as provided by Strava. The activity is divided into two segments: DV for the visible distance and DH for the hidden distance.
+
                 </p>
                 
             
             
-        </div>
+        </article>
     </body>
 </html>

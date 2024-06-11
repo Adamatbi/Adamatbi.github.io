@@ -3,13 +3,13 @@
 :root {
     --background-color:#bebdbd;
     --dark-blue: #0b1324;
-    --medium-blue: #757ea0;
+    --medium-blue: #303b5f; /*#757ea0;*/
     --light-blue: #bac4ec;
 }
 
 
-p,a,li,ol,ul,div,span{
-    font-family: "Inter";
+p,a,li,ol,ul,div,span,article{
+    font-family: "Inter" !important;
 }
 
 nav a {
@@ -109,8 +109,8 @@ body {
 }
 
 .projects-page {
-    background-color:  rgb(179, 178, 178);
-    box-shadow: 0 0 10px 10px rgba(179, 178, 178, 0.5);
+    background-color:  #d4d4d4;/*old:#b3b2b2 new:#cac9c9*/
+    box-shadow: 0 0 10px 10px #b3b2b280;
     margin-top: 68px;
     width: min(55rem,100%);
     position: absolute;
@@ -134,14 +134,14 @@ body {
 
 .project-box {
     border: 2px solid #818181;
-    border-radius: 3px;
+    border-radius: 4px;
     padding: 20px;
     margin: 20px 20px;
-    background-color: #9f9fa1;
+    background-color: var(--background-color);/*old:#9f9fa1 new:#cac9c9*/
     text-decoration: none;
     color: inherit;
     display: block;
-    transition: 0.3s ease;
+    transition: 0.2s ease;
 }
 
 .project-box:hover {    
@@ -157,15 +157,15 @@ body {
 }
 
 .article-page {
-    background-color:  rgb(179, 178, 178);
-    box-shadow: 0 0 10px 10px rgba(179, 178, 178, 0.5);
+    background-color: #d4d4d4;/* #b3b2b2; original article page background color. new one: #cac9c9*/
+    box-shadow: 0 0 10px 10px #b3b2b280;
     margin-top: 68px;
     width: min(55rem,100%);
     position: absolute;
     left:50%;
     transform: translateX(-50%);
     top:0;
-    bottom:0;
+    min-height:100vh;
 }
 
 .article-header{
@@ -181,7 +181,27 @@ body {
 }
 
 .article-inner-title {
-    margin-left:3rem;
+    color: var(--dark-blue);
+    margin-left:1rem;
+}
+
+.article-content {
+    color: var(--dark-blue);
+    margin-top: 1rem;
+    margin-left:2rem;
+    margin-right:2rem;
+    font-size: 1.1rem;
+    line-height: 1.4;
+    font-weight: normal;
+}
+
+.article-image {
+    max-width: 100%;
+    height: auto;
+}
+
+figure{
+    margin-left:0;
 }
 
 .headshot-img {
@@ -219,6 +239,7 @@ body {
 }
 
 
+/* changes for mobile viewing*/
 @media (max-width: 480px) {
     .about-img  {
         display: none;
@@ -233,11 +254,23 @@ body {
         margin: auto;
     }
     .projects-header{
-        color: var(--dark-blue);
-        text-align: center;
-        margin-top:4rem;
+        margin-left:20px;
+        margin-top:3rem;
+        font-size: 0.7rem;
     }
-}
+    .project-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    .article-header{
+        font-size: 0.7rem;
+        margin-top:3rem;
+    }
+    figure{
+        margin-left: 0;
+        margin-right: 0;
+    }
 
 @media (max-width: 1500px) {
     .about-img {
