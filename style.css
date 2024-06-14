@@ -157,10 +157,10 @@ body {
 }
 
 .article-page {
-    background-color: #d4d4d4;/* #b3b2b2; original article page background color. new one: #cac9c9*/
-    box-shadow: 0 0 10px 10px #b3b2b280;
+    background-color: #e0e0e0;/* #d4d4d4*/
+    box-shadow: 0 0 10px 10px #e0e0e0;
     margin-top: 68px;
-    width: min(55rem,100%);
+    width: min(65rem,100%);
     position: absolute;
     left:50%;
     transform: translateX(-50%);
