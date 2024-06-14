@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Inter');
 
 :root {
-    --background-color:#bebdbd;
+    --background-color:#ffffff;/*old: #bebdbd*/
     --dark-blue: #0b1324;
     --medium-blue: #303b5f; /*#757ea0;*/
     --light-blue: #bac4ec;
@@ -112,7 +112,7 @@ body {
     background-color:  #d4d4d4;/*old:#b3b2b2 new:#cac9c9*/
     box-shadow: 0 0 10px 10px #b3b2b280;
     margin-top: 68px;
-    width: min(55rem,100%);
+    width: min(65rem,100%);
     position: absolute;
     left:50%;
     transform: translateX(-50%);
@@ -197,11 +197,20 @@ body {
 
 .article-image {
     max-width: 100%;
-    height: auto;
+    max-height: 25rem;
+    
 }
 
+/*this works as expected but might cause issues.*/
 figure{
     margin-left:0;
+    text-align: center;
+}
+
+figcaption{
+    font-size: 0.8rem;
+    color: #555;
+    text-align: center;
 }
 
 .headshot-img {
@@ -271,6 +280,7 @@ figure{
         margin-left: 0;
         margin-right: 0;
     }
+}
 
 @media (max-width: 1500px) {
     .about-img {

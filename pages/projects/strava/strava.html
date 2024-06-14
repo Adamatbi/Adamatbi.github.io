@@ -27,24 +27,86 @@
             <article class="article-content">
                 <h3 class="article-inner-title">Strava and privacy</h3>
 
-                <p>    As I embarked on training for a charity run with friends, I turned to the fitness app Strava to log my runs. Strava enables users to record and share their activity metrics, including location details, in a social media format with friends and the wider community. However, Strava has faced scrutiny from privacy advocates, notably in 2018 when it inadvertently exposed secret military bases' locations and again in 2023 when its heatmap feature was found to leak users’ home address locations.
+                <p>   This article details an information leakage vulnerability in an activity-tracking app called Strava. Strava enables users to record and share their activity metrics, including location details, in a social media format with friends and the wider community of over 120 million users. Strava has faced scrutiny from privacy advocates, notably in 2018 when it inadvertently exposed the location of secret military bases and again in 2023 when its heatmap feature was found to potentially leak users’ home address locations.
                     <br><br>
-                    To protect users, Strava introduced a feature that allows them to obfuscate their home addresses by creating "hidden zones" around them. Initially, these were perfect circles centered on the addresses. A 2018 study by Hassan et al. demonstrated that this method left users vulnerable—by identifying the edges of a hidden zone, one could pinpoint the address. In response, Strava included a randomly generated offset to the hidden zone to eliminate this attack. A bad actor using this method could still determine the contours of the hidden zone but would be unable to gain information on the exact location of the protected address within it. 
+                    To protect users, Strava introduced a feature that allows them to obfuscate sensitive locations by creating "hidden zones" around them. Initially, these were perfect circles centered on the location. A <a href="https://www.usenix.org/system/files/conference/usenixsecurity18/sec18-hassan_0.pdf">2018 study by Hassan et al.</a> demonstrated that this method left users vulnerable—by identifying the edges of a hidden zone, one could pinpoint the address. In response, Strava included a randomly generated offset to the hidden zone to eliminate this attack. A bad actor using this method could still determine the contours of the hidden zone but would be unable to gain information on the exact location of the protected address within it. 
                 </p>
+
                 <figure>
                     <img src="hiddenzone.png" alt="" class="article-image">
-                    <figcaption>Offset hidden zone of testing location.</figcaption>
+                    <figcaption>Offset hidden zone of testing location</figcaption>
                 </figure>
+
                 <h3 class="article-inner-title">Vulnerability</h3>
+
                 <p>
-                    During a run, I devised a potential method allowing a malicious actor to discern the location of a protected address within a "hidden zone”. This attack necessitates only information that is publicly displayed about an activity and may require minimal data points.
-                    <br><br>
-                    The vulnerability originates from Strava's practice of displaying the total length of an activity with 10-meter precision while keeping a part of it hidden from viewers. Let's denote DT as the total distance of an activity as provided by Strava. The activity is divided into two segments: DV for the visible distance and DH for the hidden distance.
+                    During a run, I devised a potential method allowing a malicious actor to discern the location of a protected address within a "hidden zone”. This attack only requires publicly available information. The vulnerability originates from Strava's practice of displaying the total distance of an activity to high precision, while redacting the GPS track inside the hidden zone. The activity can be divided into two segments: the visible distance and the hidden distance.
+                  
+    
 
                 </p>
                 
-            
-            
+                <figure>
+                    <img src="formula.png" alt="" class="article-image">
+                    <figcaption>Hidden section of activity shown in grey</figcaption>
+                </figure>
+
+                <p>
+                    An attacker could find the hidden distance by subtracting the visible from the total distance. With the hidden distance known, it's possible to infer that the true start and end of the activity are that distance from the publicly displayed start and end points.
+                    <br><br>
+                    By analyzing data from multiple activities that enter and exit the hidden zone at geographically spaced points, an attacker could theoretically triangulate the protected address. The practical feasibility remained uncertain, so I decided to create a test implementation. 
+                </p>
+
+                <h3 class="article-inner-title">Implementation</h3>
+
+                <p>
+                    To execute the test, I began by gathering activity data. I created an alternate account and randomly selected a residential address in Vancouver for my experiment. Strava permits a hidden zone radius ranging from 200 to 1600 meters, with 200 meters being the default choice. I opted for a 400-meter radius, accepting the first randomized offset presented.
+
+                    <br><br>
+                    I conducted four running activities, each starting and ending just outside the chosen test address, heading in different cardinal directions. My objective was to gather data conducive to the attack while reflecting typical user activities. Running in varied directions and circling a local park before returning, ensured geographically spaced entry and exit points, aiding in triangulation. Additionally, I opted for relatively short distances of approximately 2km to reduce distance calculation errors. This setup models a scenario with a limited, nearly optimal sample set. Naturally, real-world data presents more variance, however, it is possible to compensate for this with more data.
+
+                </p>
+
+                <figure>
+                    <img src="runs.png" alt="" class="article-image">
+                    <figcaption>Hidden sections in grey, visible sections in red</figcaption>
+                </figure>
+
+                <p>
+                    In reviewing the GPS logs, I anticipated discrepancies in matching my distance estimates with Strava's calculations; however, the results were surprisingly accurate. I managed to estimate a friend's 25km run within a 50-meter variance from Strava's calculation.
+
+                    <br><br>
+                    Subtracting the visible distance from the total distance for each of the four activities allowed me to derive estimates of the hidden distances. This yielded four sets of coordinates and their corresponding distances from the protected address. It's worth noting that a complication emerged in how the hidden distance was calculated; being the distance run rather than the straight-line distance between the activity's hidden zone entry point and the protected address. Since runners navigate street contours, calculating point-to-point distances requires prior knowledge of the street network.
+
+                    <br><br>
+                    To determine distances along city streets, I utilized OpenStreetMap—a free, open-source geographical database. Through OpenStreetMap data, I constructed a boundary delineating every geographic point within a specific walking distance from a starting point. This boundary encompasses all points reachable along city streets exactly that distance away from the start. By positioning the starting point at the edge of the hidden zone, the protected house should fall exactly on one of the boundary points.
+
+                </p>
+
+                <figure>
+                    <img src="singlesetdots.png" alt="" class="article-image">
+                    <figcaption>Every possible location the hidden distance away from the edge of the hidden zone</figcaption>
+                </figure>
+
+                <p>
+                    I repeated this process for all data and generated a map with varying colors for each activity. To pinpoint the protected house's location, I identified where all colors overlapped. Enclosing the smallest circle around a point where each color intersected precisely located the protected address. By using this method, the address was narrowed down to just a few houses.
+
+                </p>
+
+                <figure>
+                    <img src="combined.png" alt="" class="article-image">
+                    <figcaption>Left: Possible home locations for each activity. Right: cluster outside protected address</figcaption>
+                </figure>
+
+                <h3 class="article-inner-title">Findings Disclosure</h3>
+
+                <p>
+                    Before publishing, I disclosed my findings to the security team at Strava and delayed publication by four months. In testing this I have only used data generated by myself.
+                    <br><br>
+                    Lastly, right before publishing, I discovered a <a href="https://dl.acm.org/doi/pdf/10.1145/3548606.3560616">paper from KU Leuven in Belgium</a> outlining the same inference method used here. In it, they measure the effectiveness of the method using 1.4 million real-world activities.
+                    <br><br><br>
+                </p>
+
         </article>
     </body>
 </html>
