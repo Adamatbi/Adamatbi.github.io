@@ -4,6 +4,7 @@
 :root {
     --background-color:#ffffff;/*old: #bebdbd*/
     --dark-blue: #0b1324;
+    --blue: #001b44;
     --medium-blue: #303b5f; /*#757ea0;*/
     --light-blue: #bac4ec;
 }
@@ -34,7 +35,7 @@ body, html{
     height: 100%;
     background-color: white;
     width: 15rem;
-    border-right: 1px solid darkgrey;
+    border-right: 1px solid var(--dark-blue);
 }
 
 .nav-bar-contents {
@@ -42,7 +43,7 @@ body, html{
 }
 
 .logo a{
-    color : #001b44;
+    color : var(--blue);
     text-decoration: none;
     font-size: 3.5rem;
     font-weight: 230;
@@ -58,7 +59,7 @@ body, html{
 }
 
 .links a {
-    color: #001b44;
+    color: var(--blue);
     text-decoration: none;
     transition: 0.2s ease;
     font-size: 1.5rem;
