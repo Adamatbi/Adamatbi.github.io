@@ -79,80 +79,11 @@ li{
 p,a,li,ol,ul,div,span,article{
     font-family: "Inter";
 }
-
-
-/*
-nav a {
-    color: var(--light-blue);
-    text-decoration: none;
-    transition: 0.2s ease;
-}
-
-nav a:hover {
-    color: var(--light-blue);
-    border-color: transparent;
-}
-
-li a:hover {
-    background-color: var(--medium-blue);
-
-}
-
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-}
-
-li a {
-    display: inline-block;
-    text-align: center;
-    padding: 25px 30px;
-    font-weight: 600;
-    font-size: 1.4rem;
-}
-
-li {
-    display: inline;
-}
-
-.top-bar{
-    background-color:  var(--dark-blue);
-    position: fixed;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index:1000;
-}
-
-
-*/
-/*
-.page-links {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-}
-*/
   
 body {
-    /*background-color: rgb(219, 216, 216)*/
     background-color: var(--background-color);
     overflow-x: hidden; /* Hide horizontal scrollbar */
     width: 100%; /* Ensure width does not exceed viewport */
-    /*box-sizing: border-box; /* Ensure padding and border are included in element's total width */
-}
-
-.introduction{
-    padding: auto;
-    position: relative;
-    z-index: 500;
 }
 
 .main-page{
@@ -160,7 +91,6 @@ body {
     position: relative;
     z-index: 500;
 }
-
 
 .main-content{
     position: absolute;
@@ -189,12 +119,6 @@ body {
     margin-left:5rem;
 }
 
-.project-page-top-line {
-    color: var(--dark-blue);
-    border-top:3px solid  var(--dark-blue);
-    border-bottom: None;
-}
-
 .project-box {
     border: 2px solid #c4c3c3;
     border-radius: 4px;
@@ -210,10 +134,12 @@ body {
 .project-box:hover {    
     border: 2px solid  var(--dark-blue);
 }
+
 .project-title {
     font-size: 1.5em;
     margin-bottom: 10px;
 }
+
 .project-description {
     font-size: 1em;
     color: #555;
@@ -228,12 +154,6 @@ body {
 .article-header{
     color: var(--dark-blue);
     text-align: center;
-}
-
-.article-page-top-line {
-    color: var(--dark-blue);
-    border-top:3px solid  var(--dark-blue);
-    border-bottom: None;
 }
 
 .article-inner-title {
@@ -269,30 +189,6 @@ figcaption{
     text-align: center;
 }
 
-.headshot-img {
-    position: relative;
-    top: 5rem;
-    left: -12%;
-    border-radius: 10%;
-    width: auto;
-    height: 30rem; /* Adjust the height to take into account the navigation bar */
-    z-index: 0; /* Lower z-index than the top-bar */
-}
-
-
-.home-page-top-line {
-    border: none;
-    border-top: 3px solid black;
-    color:  var(--dark-blue);
-    overflow: visible;
-    text-align: center;
-    height: 5px;
-    margin-top:5rem;
-    box-sizing: border-box; 
-    width: 100%; 
-}
-
-
 .about-img {
     position: absolute;
     top: 0;
@@ -303,13 +199,9 @@ figcaption{
     z-index: 0; /* Lower z-index than the top-bar */
 }
 
-
 /* changes for mobile viewing*/
 @media (max-width: 480px) {
     .about-img  {
-        display: none;
-    }
-    .headshot-img  {
         display: none;
     }
     .hello-img  {
