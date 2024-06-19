@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Inter');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
 
 :root {
     --background-color:#ffffff;/*old: #bebdbd*/
@@ -8,10 +9,78 @@
 }
 
 
-p,a,li,ol,ul,div,span,article{
-    font-family: "Inter" !important;
+body, html{
+    margin: 0;
+    padding: 0;
+}
+.container {
+    display: flex;
+    height: 100%;
+    margin:0;
+    padding:0;
+    
 }
 
+.content {
+    flex: 1;
+    background-color: white;
+    margin-left: 15rem;
+    min-height: 100vh;
+    top:0;
+}
+
+.nav-bar {
+    position: fixed;
+    height: 100%;
+    background-color: white;
+    width: 15rem;
+    border-right: 1px solid darkgrey;
+}
+
+.nav-bar-contents {
+    margin: 2rem 2.5rem 0 2rem;
+}
+
+.logo a{
+    color : #001b44;
+    text-decoration: none;
+    font-size: 3.5rem;
+    font-weight: 230;
+    line-height: 1;
+    text-transform: uppercase;
+    font-family: "Roboto Mono" !important;
+}
+
+.links {
+    margin-top: 2rem;
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.links a {
+    color: #001b44;
+    text-decoration: none;
+    transition: 0.2s ease;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+li{ 
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+
+p,a,li,ol,ul,div,span,article{
+    font-family: "Inter";
+}
+
+
+/*
 nav a {
     color: var(--light-blue);
     text-decoration: none;
@@ -60,6 +129,8 @@ li {
     z-index:1000;
 }
 
+
+*/
 /*
 .page-links {
     position: absolute;
@@ -84,7 +155,6 @@ body {
 }
 
 .main-page{
-    margin-top: 50px;
     padding: auto;
     position: relative;
     z-index: 500;
@@ -92,16 +162,16 @@ body {
 
 
 .main-content{
-    padding: auto;
-    position: relative;
+    position: absolute;
     overflow: hidden;
     z-index: 500;
 }
+
 .hello-img {
     position: relative;
-    top: 5rem;
+    top: 10rem;
     width: calc(min(40rem, 100%));
-    margin-left: 20%;
+    margin-left: 10%;
     height:auto;
     /*height: 25rem; /* Adjust the height to take into account the navigation bar */
     z-index: 0; /* Lower z-index than the top-bar */
@@ -109,21 +179,13 @@ body {
 }
 
 .projects-page {
-    background-color:  #d4d4d4;/*old:#b3b2b2 new:#cac9c9*/
-    box-shadow: 0 0 10px 10px #b3b2b280;
-    margin-top: 68px;
-    width: min(65rem,100%);
-    position: absolute;
-    left:50%;
-    transform: translateX(-50%);
-    top:0;
-    bottom:0;
+    width: min(55rem,100%);
+    margin-top: 2rem;
 }
 
 .projects-header{
     color: var(--dark-blue);
     margin-left:5rem;
-    margin-top:4rem;
 }
 
 .project-page-top-line {
@@ -133,7 +195,7 @@ body {
 }
 
 .project-box {
-    border: 2px solid #818181;
+    border: 2px solid #c4c3c3;
     border-radius: 4px;
     padding: 20px;
     margin: 20px 20px;
@@ -157,20 +219,13 @@ body {
 }
 
 .article-page {
-    background-color: #e0e0e0;/* #d4d4d4*/
-    box-shadow: 0 0 10px 10px #e0e0e0;
-    margin-top: 68px;
-    width: min(65rem,100%);
-    position: absolute;
-    left:50%;
-    transform: translateX(-50%);
-    top:0;
+    width: min(55rem,100%);
     min-height:100vh;
+    margin-top: 2rem;
 }
 
 .article-header{
     color: var(--dark-blue);
-    margin-top:4rem;
     text-align: center;
 }
 
@@ -243,7 +298,7 @@ figcaption{
     right: 0;
     bottom: 0;
     width: auto;
-    height: calc(100vh - 50px); /* Adjust the height to take into account the navigation bar */
+    height: calc(100vh); /* Adjust the height to take into account the navigation bar */
     z-index: 0; /* Lower z-index than the top-bar */
 }
 
