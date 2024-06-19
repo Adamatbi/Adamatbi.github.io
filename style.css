@@ -14,20 +14,14 @@ body, html{
     margin: 0;
     padding: 0;
 }
+
 .container {
     display: flex;
+    flex-direction: column;
     height: 100%;
     margin:0;
     padding:0;
     
-}
-
-.content {
-    flex: 1;
-    background-color: white;
-    margin-left: 15rem;
-    min-height: 100vh;
-    top:0;
 }
 
 .nav-bar {
@@ -38,8 +32,17 @@ body, html{
     border-right: 1px solid var(--dark-blue);
 }
 
+.content {
+    flex: 1;
+    background-color: white;
+    margin-left: 15rem;
+    min-height: 100vh;
+    top:0;
+}
+
+
 .nav-bar-contents {
-    margin: 2rem 2.5rem 0 2rem;
+    margin: 1.5rem 0 1rem 2rem;
 }
 
 .logo a{
@@ -98,16 +101,23 @@ body {
     z-index: 500;
 }
 
-.hello-img {
+.introduction{
     position: relative;
-    top: 10rem;
+    height: 35rem;
+    margin-top: 0rem;
+}
+
+.hello-img {
+    position: absolute;
     width: calc(min(40rem, 100%));
+    bottom: 0;
     margin-left: 10%;
     height:auto;
     /*height: 25rem; /* Adjust the height to take into account the navigation bar */
     z-index: 0; /* Lower z-index than the top-bar */
 
 }
+
 
 .projects-page {
     width: min(55rem,100%);
@@ -199,8 +209,69 @@ figcaption{
     z-index: 0; /* Lower z-index than the top-bar */
 }
 
+
+/*navigation bar transitions to top*/
+@media (max-width: 1200px){
+    li{
+        display: inline;
+        margin-top: 0;
+        margin-bottom: 0;
+        margin-right: 1.3rem;
+    }
+    .links {
+        margin-top: 1.5rem;
+        list-style-type: none;
+        padding-left: 0;
+    }
+    .logo a{
+        /*the default word spacing has a large gap between name*/
+        font-size: 3rem;
+        word-spacing: -0.5rem;
+    }
+    
+    .nav-bar{
+        position: static;
+        height:10rem;
+        width:100vw;
+        border-bottom: 1px solid var(--dark-blue);
+        border-right: none;
+    }
+    .content{
+        margin-left: 0;
+        min-height: calc(100vh - 10rem);
+    }
+    .hello-img  {
+        margin-left: 3%;
+    }
+
+}
+
 /* changes for mobile viewing*/
 @media (max-width: 480px) {
+
+    /*changes to navigation bar*/
+    .logo a{
+        font-size: 2.5rem;
+    }
+    .links a{
+        font-size: 1.3rem;
+    }
+    li{
+        margin-right: 1rem;
+    }
+    .nav-bar{
+        /*position: static;*/
+        height:8rem;
+        width:100vw;
+        border-bottom: 1px solid var(--dark-blue);
+        border-right: none;
+    }
+    .content{
+        margin-left: 0;
+        min-height: calc(100vh - 8rem);
+    }
+
+    /*other changes*/
     .about-img  {
         display: none;
     }
