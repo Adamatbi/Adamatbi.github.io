@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Inter');
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
 
+
 :root {
     --background-color:#ffffff;/*old: #bebdbd*/
     --dark-blue: #0b1324;
@@ -27,17 +28,17 @@ body, html{
 .nav-bar {
     position: fixed;
     height: 100%;
-    background-color: white;
     width: 15rem;
-    border-right: 1px solid var(--dark-blue);
+    border-right: 1px solid var(--blue);
+    z-index: 1000;
 }
 
 .content {
     flex: 1;
-    background-color: white;
     margin-left: 15rem;
     min-height: 100vh;
     top:0;
+    
 }
 
 
@@ -62,6 +63,7 @@ body, html{
 }
 
 .links a {
+    /*color: var(--blue);*/
     color: var(--blue);
     text-decoration: none;
     transition: 0.2s ease;
@@ -105,19 +107,47 @@ body {
     position: relative;
     height: 35rem;
     margin-top: 0rem;
+    
 }
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
 
 .hello-img {
     position: absolute;
     width: calc(min(40rem, 100%));
-    bottom: 0;
+    bottom: 2rem;
     margin-left: 10%;
     height:auto;
-    /*height: 25rem; /* Adjust the height to take into account the navigation bar */
-    z-index: 0; /* Lower z-index than the top-bar */
-
+    z-index: 10; /* Lower z-index than the top-bar */
+    animation: fadeIn 2s;
 }
 
+.hello-graphic{
+    position: absolute;
+    width: calc(min(40rem, 100%));
+    height: 13rem;
+    bottom: 4rem;
+    margin-left: 25%;
+    background-image: radial-gradient(#bbbaba 0.2rem, transparent 0);
+    background-size: 25px 25px;
+    animation: fadeIn 2s;
+}
+
+.hello-color-block  {
+    background-color: #bdbaba;/*#3f74c4;*/
+    position: absolute;
+    width: calc(min(60rem, 100%));
+    height: 30rem;
+    bottom: 0rem;
+    margin-left: 7%;
+    clip-path: polygon(0 0, 85% 0, 100% 25%, 100% 100%, 0% 100%);
+    border-radius: 5px;
+}
+ 
 
 .projects-page {
     width: min(55rem,100%);
@@ -242,6 +272,9 @@ figcaption{
     }
     .hello-img  {
         margin-left: 3%;
+    }
+    .hello-color-block{
+        margin-left: 1%;
     }
 
 }
