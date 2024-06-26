@@ -286,6 +286,14 @@ figcaption{
     .hello-color-block{
         margin-left: 1rem;
     }
+    
+    .intro-projects-header{
+        margin-left:1rem;
+    }
+
+    .projects-offset-container{
+        margin-left: 0rem;
+    }
 
 }
 
