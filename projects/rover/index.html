@@ -35,27 +35,22 @@
                         <h3 class="article-inner-title">Concept</h3>
 
                         <p>
-                            In our embedded systems class, my team and I developed a robotic car equipped with a camera to scan for people, and navigate towards them. 
-                            This project merged hardware design, embedded programming, and computer vision to create a vehicle that could drive autonomously.
-                            In this blog post, I'll share the development process, challenges, and lessons learned from creating this autonomous vehicle.
+                            In our embedded systems class, my team and I developed a robotic car equipped with a camera to scan for people and navigate towards them.
+                            This project combined hardware design, embedded programming, and computer vision to create a vehicle that could drive autonomously.
                             <br><br>
-                            Our stated goal was to be able to be placed on the ground and look around untill it sees a human.
-                            Once finding a person it should navigate towards them correcting its path as it goes.
-                            Finally when it arrives at the person it should stop at a set distance at their feet.
-                            This concept could be used in a variety of applications such as a delivery or security robot.
+                            Our goal was to create a robotic car that could be placed on the ground, look around until it saw a human, navigate towards the person while correcting its path around obstacles, and finally stop at a set distance at their feet.
+                            This concept could be used in a variety of applications, such as delivery or security robots.
 
                         </p>
 
                         <h3 class="article-inner-title">Physical Design</h3>
 
                         <p>   
-                            We started with a base made from a commercial kit that included a chassis, motors, and wheels. 
-                            For the computation we used a BeagleBone which is an open-source single-board computer that runs Linux.
-                            To enable driving we needed to be able to control the motors. We did this using a pair of relays to control power to the wheels.
-                            The BeagleBone was connected to the relays using GPIO pins. To enable the car to drive autonomously we used a camera to capture images.
-                            We used a logitech camera that was connected to the BeagleBone using a USB port.
-                            The camera is able to locate the directions of humans but is not able to detect exact distance so we used an ultrasonic sensor for final guidance.
-                            The ultrasonic sensor was connected to the BeagleBone using GPIO. 
+                            We started with a commercial kit that included a chassis, motors, and wheels. For the computation, we used a BeagleBone, an open-source single-board computer running Linux.
+                            To control the motors, we connected a pair of relays to the BeagleBone using GPIO pins.
+                            A Logitech camera, connected to the BeagleBone via USB, was used to capture images and locate humans.
+                            However, since the camera couldn’t detect exact distances, we integrated an ultrasonic sensor for precise guidance.
+                            This sensor was also connected to the BeagleBone using GPIO pins.
                         </p>
                         
                         <figure>
@@ -66,12 +61,11 @@
                         <h3 class="article-inner-title">Software and System Architecture</h3>
 
                         <p>
-                            The software was split into two main components, the BeagleBone ran the main program written in C and cross compiled to be ran on the BeagleBones ARM processor.
-                            This program did the brunt of the work and was responsible for IO with sensors and motors, and control logic. 
-                            The second component was a python script that ran on a laptop and was responsible for the facial recognition. 
-                            We used AWS rekognition to detect faces and the pixel locations of faces would be sent to the BeagleBone.
-                            The BeagleBone would then use this information to navigate the car. 
-                            The C program was multithreaded with hardware abstraction layers for individule components to maximise modularity.
+                            The software architecture comprised two main components.
+                            The BeagleBone hosted the core C-program, cross-compiled for its ARM processor, responsible for sensor and motor control, as well as decision-making logic.
+                            Concurrently, a Python script executed on a laptop handled facial recognition tasks using AWS Rekognition.
+                            The script transmitted pixel coordinates of detected faces to the BeagleBone, enabling it to navigate towards the identified targets.
+                            The C program was multithreaded with hardware abstraction layers for hardware components to maximise modularity and code reuse.
                         </p>
 
                         <figure>
@@ -79,13 +73,27 @@
                             <figcaption>testing systems</figcaption>
                         </figure>
 
+                        <h3 class="article-inner-title">Control logic</h3>
+
                         <p>
-                            
+                            Since the rover controls its own movement and therefor knows its path, it can also use previously gathered data to make decisions.
+                            The ultrasonic sensor detects objects within a range of approximately 3 meters, so additional methods are needed for measuring longer distances.
+                            The camera, on the other hand, can detect the location of a face in both azimuth and elevation.
+                            The azimuth measurement helps orient the rover toward the target, while the elevation measurement is recorded.
+                            The rover then moves forward a set distance and takes another photo of the target.
+                            By comparing the elevation angle of the target in the two photos and knowing the distance traveled, the rover can calculate the distance to the person using trigonometry.
+                            It continually updates its position and adjusts its path to reach the target.
+
+                            <br><br>
+                            When the rover detects an obstacle using its ultrasonic sensor, it notices the difference between the predicted distance to the target and the actual distance to the object in front of it, confirming the obstacle's presence.
+                            The rover then navigates around the obstacle to continue toward its target.
+                            By constantly tracking its path and its position relative to the target, the rover can effectively bypass obstacles and stay on course.
+                            Once it reaches the target, it uses the ultrasonic sensor to stop precisely at the target's feet.
                         </p>
 
                         <figure>
                             <img src="images/team.jpg" alt="" class="article-image">
-                            <figcaption>group photo</figcaption>
+                            <figcaption></figcaption>
                         </figure>
 
                 </article>
