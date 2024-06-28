@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Adam Atbi</title>
+        <link rel="stylesheet" href="../style.css">
+    </head>
+    
+    <body>
+
+        <div class="container">
+            <div class="nav-bar">
+                <div class="nav-bar-contents">
+                    <div class="logo">
+                        <a href="../">Adam Atbi</a>
+                    </div>
+                    
+                    <ul class="links">
+                        <li><a href="../projects">Projects</a></li>
+                        <li><a href="../resume.pdf">Resume</a></li>
+                        <li><a href="">About Me</a></ul></li>
+                    </ul>
+                </div>
+               
+            </div>
+            <div class="content">
+                <div class="main-page">
+                    <div class="main-content">
+                        
+                        <!--div class="contact-form">
+                            <form
+                                action="https://formspree.io/f/mkgwwdkv"
+                                method="POST"
+                                >
+                                <label>
+                                    Your email:
+                                    <input type="email" name="email">
+                                </label>
+                                <label>
+                                    Your message:
+                                    <br>
+                                    <textarea name="message"></textarea>
+                                </label>
+                                <button type="submit">Send</button>
+                            </form>
+                        </div-->
+                            
+                        <div class="contact-form">
+                            <form id="contact-form">
+                                <label>
+                                    Your email:
+                                    <input type="email" name="email">
+                                </label>
+                                <label>
+                                    Your message:
+                                    <br>
+                                    <textarea name="message"></textarea>
+                                </label>
+                                <button type="submit">Send</button>
+                            </form>
+                        </div>
+
+
+                        <!--form id="contact-form">
+                            <input type="email" name="email" placeholder="Your email" required>
+                            <textarea name="message" placeholder="Your message" required></textarea>
+                            <button type="submit">Send</button>
+                        </form-->
+                          <div id="form-response"></div>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            document.getElementById('contact-form').addEventListener('submit', function(event) {
+              event.preventDefault(); // Prevent the default form submission
+            
+              const form = event.target;
+              const formData = new FormData(form);
+              const responseDiv = document.getElementById('form-response');
+              fetch('https://formspree.io/f/mkgwwdkv', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                  'Accept': 'application/json'
+                }
+              }).then(response => {
+                if (response.ok) {
+                  responseDiv.textContent = 'Thank you for your message!';
+                  form.reset();
+                } else {
+                  responseDiv.textContent = 'Oops! There was a problem with your submission.';
+                }
+              }).catch(error => {
+                responseDiv.textContent = 'Oops! There was a problem with your submission.';
+              });
+            });
+            </script>
+    </body>
+</html>
