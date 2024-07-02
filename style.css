@@ -81,10 +81,7 @@ li{
 }
 
 .mail-icon{
-    position: absolute;
-    width: 3rem;
-    bottom: 2rem;
-    left: 2rem;
+    display:none;
 }
 
 
@@ -256,6 +253,7 @@ figcaption{
     z-index: 0; /* Lower z-index than the top-bar */
 }
 
+
 .contact-form {
     margin-left: 1rem;
     margin-right: 1rem;
@@ -328,12 +326,6 @@ label{
         width:100vw;
         border-bottom: 1px solid var(--dark-blue);
         border-right: none;
-    }
-    
-    .mail-icon{
-        position: static;
-        height: 1.2rem;
-        width: auto;
     }
 
 
@@ -428,6 +420,17 @@ label{
     figure{
         margin-left: 0;
         margin-right: 0;
+    }
+
+    .mail-icon{
+        display:inline;
+        position: static;
+        height: 1.2rem;
+        width: auto;
+    }
+
+    .contact-link{
+        display: none;
     }
 }
 
