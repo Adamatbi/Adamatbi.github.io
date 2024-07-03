@@ -270,8 +270,8 @@ figcaption{
         linear-gradient(-45deg, white 25px, rgba(255,255,255,0) 25px),
         linear-gradient(-135deg, white 25px, rgba(255,255,255,0) 25px),
         linear-gradient(-45deg, var(--blue) 40px, rgba(255,255,255,0) 40px),
-        linear-gradient(-135deg, var(--blue) 40px, rgba(255,255,255,0) 40px),
-        linear-gradient(-45deg, white 55px, rgba(255,255,255,0) 55px),
+        linear-gradient(-135deg, var(--blue) 40px, rgba(255,255,255,0) 40px);
+        /*linear-gradient(-45deg, white 55px, rgba(255,255,255,0) 55px),
         linear-gradient(-135deg, white 55px, rgba(255,255,255,0) 55px),
         linear-gradient(-45deg, var(--blue) 70px, rgba(255,255,255,0) 70px),
         linear-gradient(-135deg, var(--blue) 70px, rgba(255,255,255,0) 70px),
@@ -291,7 +291,7 @@ figcaption{
         linear-gradient(-135deg, var(--blue) 70px, rgba(255,255,255,0) 70px),
         linear-gradient(-45deg, white 85px, rgba(255,255,255,0) 85px),
         linear-gradient(-135deg, white 85px, rgba(255,255,255,0) 85px);
-}
+}*/
 
 
 
