@@ -145,7 +145,7 @@ body {
 .hello-color-block  {
     background-color: #bdbaba;/*#3f74c4;*/
     position: absolute;
-    width: calc(min(60rem, 90%));
+    width: calc(min(50rem, 90%));
     height: 28rem;
     bottom: 0rem;
     margin-left: 5rem;
