@@ -62,15 +62,13 @@
                         </figure>
         
                         <p>
-                            An attacker could find the hidden distance by subtracting the visible from the total distance. With the hidden distance known, it's possible to infer that the true start and end of the activity are that distance from the publicly displayed start and end points.
-                            <br><br>
-                            By analyzing data from multiple activities that enter and exit the hidden zone at geographically spaced points, an attacker could theoretically triangulate the protected address. The practical feasibility remained uncertain, so I decided to create a test implementation. 
+                            An attacker could find the hidden distance by subtracting the visible from the total distance. With the hidden distance known, it's possible to infer that the true start and end of the activity are that distance from the publicly displayed start and end points. By analyzing data from multiple activities that enter and exit the hidden zone at geographically spaced points, an attacker could triangulate the protected address.
                         </p>
         
                         <h3 class="article-inner-title">Implementation</h3>
         
                         <p>
-                            To execute the test, I began by gathering activity data. I created an alternate account and randomly selected a residential address in Vancouver for my experiment. Strava permits a hidden zone radius ranging from 200 to 1600 meters, with 200 meters being the default choice. I opted for a 400-meter radius, accepting the first randomized offset presented.
+                            I began by gathering activity data, created an alternate account and randomly selected a residential address in Vancouver for my experiment. Strava permits a hidden zone radius ranging from 200 to 1600 meters, with 200 meters being the default choice. I opted for a 400-meter radius, accepting the first randomized offset presented.
         
                             <br><br>
                             I conducted four running activities, each starting and ending just outside the chosen test address, heading in different cardinal directions. My objective was to gather data conducive to the attack while reflecting typical user activities. Running in varied directions and circling a local park before returning, ensured geographically spaced entry and exit points, aiding in triangulation. Additionally, I opted for relatively short distances of approximately 2km to reduce distance calculation errors. This setup models a scenario with a limited, nearly optimal sample set. Naturally, real-world data presents more variance, however, it is possible to compensate for this with more data.

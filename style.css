@@ -192,11 +192,30 @@ body {
 .project-title {
     font-size: 1.5em;
     margin-bottom: 10px;
+    color: var(--blue)
 }
 
 .project-description {
-    font-size: 1em;
-    color: #555;
+    font-size: 1.1em;
+    /*color: #444444;*/
+    color: var(--blue)
+}
+
+.project-teaser{
+    position: relative;
+    overflow: hidden;
+    
+    /* Example background color or image */
+    background-color: white; 
+    color: black;
+    
+    /* Applying the fade-out effect */
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+
+.fade-out p {
+    margin: 0;
+    line-height: 1.5;
 }
 
 .article-page {
