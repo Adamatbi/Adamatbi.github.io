@@ -504,6 +504,11 @@ label{
         font-size: 0.7rem;
         margin-top:3rem;
     }
+
+    .project-teaser{
+        display: none;
+    }
+
     figure{
         margin-left: 0;
         margin-right: 0;
