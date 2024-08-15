@@ -514,7 +514,7 @@ label{
         margin-right: 0;
     }
 
-    .mail-icon{
+    /* .mail-icon{
         display:inline;
         position: static;
         height: 1.2rem;
@@ -523,7 +523,7 @@ label{
 
     .contact-link{
         display: none;
-    }
+    } */
 }
 
 @media (max-width: 1500px) {
