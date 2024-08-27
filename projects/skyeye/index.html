@@ -36,19 +36,36 @@
                     <article class="article-content">
 
                         <p>   
-                            The rapid adoption of Unmanned Aerial Vehicles (UAVs) offers significant advantages in the defense sector, but also exposes vulnerabilities. Electronic warfare, particularly GPS jamming, poses a critical threat, rendering many commercial UAVs inoperable. While inertial navigation systems offer resistance to jamming, they are prone to drift over time. Optical navigation emerges as a promising solution, enabling reliable and jam-resistant navigation.
+                            The rapid adoption of Unmanned Aerial Vehicles (UAVs) offers significant advantages in the defense sector, but also exposes vulnerabilities
+                            Electronic warfare, particularly GPS jamming, poses a critical threat, rendering many commercial UAVs inoperable
+                            While inertial navigation systems offer resistance to jamming, they are prone to drift over time
+                            Optical navigation emerges as a promising solution, enabling reliable and jam-resistant navigation.
                             <br><br>
-                            Instead of relying on computationally expensive image comparisons, Skyeye utilizes distinct reference points within captured images. This strategy minimizes storage requirements by storing coordinates instead of entire images. Furthermore, it enhances resilience to environmental changes, ensuring consistent navigation as long as the vision algorithm can identify key points, irrespective of variations in surrounding visuals.
+                            Instead of relying on computationally expensive image comparisons, Skyeye utilizes distinct reference points within captured images
+                            This strategy minimizes storage requirements by storing coordinates instead of entire images
+                            Furthermore, it enhances resilience to environmental changes, ensuring consistent navigation as long as the vision algorithm can identify key points, irrespective of variations in surrounding visuals.
                             <br><br>
-                            This core challenge can be broken down into three logical components. Firstly, the system must accurately identify specific reference points within images captured by the UAV. Secondly, it needs to determine the precise real-world coordinates of these identified reference points within the operational area. Lastly, the system must align the plane derived from identified image points with the plane formed by their corresponding true locations. This involves calculating the optimal scale, rotation, and translation to overlay the former onto the latter, effectively pinpointing the UAV's location.
+                            This core challenge can be broken down into three logical components
+                            Firstly, the system must accurately identify specific reference points within images captured by the UAV
+                            Secondly, it needs to determine the precise real-world coordinates of these identified reference points within the operational area
+                            Lastly, the system must align the plane derived from identified image points with the plane formed by their corresponding true locations
+                            This involves calculating the optimal scale, rotation, and translation to overlay the former onto the latter, effectively pinpointing the UAV's location.
                         </p>
 
                         <h3 class="article-inner-title">Vision</h3>
                        
                         <p>
-                            For this implementation, I opted to utilize building roofs as reference points. This choice offers several key advantages. Firstly, their size makes them easily detectable by a drone camera, even at altitude. Secondly, their high degree of visual similarity simplifies the training process for the detection algorithm. Importantly, the program's architecture allows for flexibility in choosing ground reference points; simply swap in a vision model trained on a different dataset to adapt to alternative environments.
+                            For this implementation, I opted to utilize building roofs as reference points
+                            This choice offers several key advantages
+                            Firstly, their size makes them easily detectable by a drone camera, even at altitude
+                            Secondly, their high degree of visual similarity simplifies the training process for the detection algorithm
+                            Importantly, the program's architecture allows for flexibility in choosing ground reference points; simply swap in a vision model trained on a different dataset to adapt to alternative environments.
                             <br><br>
-                            I employed the YOLO8 vision model, trained on a custom dataset comprising 2,673 roof annotations across 22 images captured around Vancouver, BC. These images were acquired using a DJI Mini SE at altitudes ranging from 200 to 280 meters. Testing the model on previously unseen images yielded promising results (see below). A confidence threshold of 0.85 proved optimal, striking a balance between minimizing false positives and missed houses. The center points of the resulting bounding boxes were then extracted to provide the reference points for map matching.
+                            I employed the YOLO8 vision model, trained on a custom dataset comprising 2,673 roof annotations across 22 images captured around Vancouver, BC
+                            These images were acquired using a DJI Mini SE at altitudes ranging from 200 to 280 meters
+                            Testing the model on previously unseen images yielded promising results (see below)
+                            A confidence threshold of 0.85 proved optimal, striking a balance between minimizing false positives and missed houses
+                            The center points of the resulting bounding boxes were then extracted to provide the reference points for map matching.
                         </p>
 
                         <figure>
@@ -59,15 +76,23 @@
                         <h3 class="article-inner-title">Reference points</h3>
 
                         <p>
-                            To acquire the locations of buildings, I turned to OpenStreetMap – a free, open-source geographical database. The system takes a bounding box defining the operational area and queries the database to identify all buildings within that region. It then calculates the center point of each building, providing the necessary reference points for localization.
+                            To acquire the locations of buildings, I turned to OpenStreetMap – a free, open-source geographical database
+                            The system takes a bounding box defining the operational area and queries the database to identify all buildings within that region
+                            It then calculates the center point of each building, providing the necessary reference points for localization.
                             <br><br>
-                            Importantly, the system is designed with flexibility in mind, allowing for easy adaptation to diverse terrains and reference point types. While houses proved ideal for this urban-focused implementation, rural environments might necessitate alternatives such as crossroads, trees, field boundaries, silos, or other prominent features. Multiple categories of reference points can be used to increase the density of reference points in a given area. If geographic databases are not readily available reference points can be sourced by processing aerial and satellite imagery.
+                            Importantly, the system is designed with flexibility in mind, allowing for easy adaptation to diverse terrains and reference point types
+                            While houses proved ideal for this urban-focused implementation, rural environments might necessitate alternatives such as crossroads, trees, field boundaries, silos, or other prominent features
+                            Multiple categories of reference points can be used to increase the density of reference points in a given area
+                            If geographic databases are not readily available reference points can be sourced by processing aerial and satellite imagery.
                         </p>
 
                         <h3 class="article-inner-title">Matching engine</h3>
 
                         <p>
-                            The most interesting aspect of this project was designing a system capable of aligning the points identified by the vision model with their corresponding real-world counterparts. In theory, the points from the vision model should perfectly match the reference points on the ground yet that never occurs. The system must contend with false positives (phantom points) and false negatives (missed points) from the vision model, potential inaccuracies or outdated information within the reference data itself, and inherent errors within the vision pipeline – from lens distortion to bounding box placement. Each vision-derived point, therefore, carries a margin of error relative to its true location.
+                            The most interesting aspect of this project was designing a system capable of aligning the points identified by the vision model with their corresponding real-world counterparts
+                            In theory, the points from the vision model should perfectly match the reference points on the ground yet that never occurs
+                            The system must contend with false positives (phantom points) and false negatives (missed points) from the vision model, potential inaccuracies or outdated information within the reference data itself, and inherent errors within the vision pipeline – from lens distortion to bounding box placement
+                            Each vision-derived point, therefore, carries a margin of error relative to its true location.
                         </p>
 
                         <figure>
@@ -76,11 +101,19 @@
                         </figure>
 
                         <p>
-                            To accurately overlay the plane of vision points onto the corresponding ground plane, the system must determine the optimal scale, rotation, and translation to apply. The "loss," or quality of the match, is calculated by averaging the distances between each vision point and its nearest ground point, discarding the top 10% of outliers to mitigate the impact of gross errors.
+                            To accurately overlay the plane of vision points onto the corresponding ground plane, the system must determine the optimal scale, rotation, and translation to apply
+                            The "loss," or quality of the match, is calculated by averaging the distances between each vision point and its nearest ground point, discarding the top 10% of outliers to mitigate the impact of gross errors.
                             <br><br>
-                            A key challenge is that even tiny deviations from the optimal scale, rotation, or translation can dramatically alter the calculated loss. A solution with the correct scale and rotation but a marginally incorrect translation might exhibit a loss value no better than a completely random solution. This makes it difficult to hone in on the correct alignment because adjustments closer to the correct position don't necessarily lead to better results. 
+                            A key challenge is that even tiny deviations from the optimal scale, rotation, or translation can dramatically alter the calculated loss
+                            A solution with the correct scale and rotation but a marginally incorrect translation might exhibit a loss value no better than a completely random solution
+                            This makes it difficult to hone in on the correct alignment because adjustments closer to the correct position don't necessarily lead to better results
+                            
                             <br><br>
-                            To overcome this challenge, I focused on matching points between the vision and ground planes based on the spatial relationships between points, rather than their absolute positions. This required  a method for quantifying the relative positions of neighboring points in a way that remained consistent regardless of rotation or scale differences. I achieved this by using each point's nearest neighbor as a reference point. The distances and angles to its 'N' closest neighbors were then calculated relative to this reference. Distances were measured as multiples of the distance to the reference point, and angles were measured clockwise from the reference point.
+                            To overcome this challenge, I focused on matching points between the vision and ground planes based on the spatial relationships between points, rather than their absolute positions
+                            This required  a method for quantifying the relative positions of neighboring points in a way that remained consistent regardless of rotation or scale differences
+                            I achieved this by using each point's nearest neighbor as a reference point
+                            The distances and angles to its 'N' closest neighbors were then calculated relative to this reference
+                            Distances were measured as multiples of the distance to the reference point, and angles were measured clockwise from the reference point.
                         </p>
 
                         <figure>
@@ -89,9 +122,13 @@
                         </figure>
 
                         <p>
-                            As illustrated above, the unique spatial pattern of neighboring points can be encoded into a "fingerprint" representation. By comparing these fingerprints, potential matches between the vision and ground planes can be identified. Aligning two vision points with their corresponding ground points provides a potential solution for the drone's location.
+                            As illustrated above, the unique spatial pattern of neighboring points can be encoded into a "fingerprint" representation
+                            By comparing these fingerprints, potential matches between the vision and ground planes can be identified
+                            Aligning two vision points with their corresponding ground points provides a potential solution for the drone's location.
                             <br><br>
-                            The optimal solution is then determined by identifying the pair of matched points that minimizes the overall loss between the vision and ground planes. The image below showcases the blue vision plane overlaid onto the red ground plane, with the two matched pairs highlighted. In this instance, the system successfully determined the drone's location within 7 meters of its GPS-recorded position.
+                            The optimal solution is then determined by identifying the pair of matched points that minimizes the overall loss between the vision and ground planes
+                            The image below showcases the blue vision plane overlaid onto the red ground plane, with the two matched pairs highlighted
+                            In this instance, the system successfully determined the drone's location within 7 meters of its GPS-recorded position.
                         </p>
 
                         
@@ -103,7 +140,11 @@
                         <h3 class="article-inner-title">Results</h3>
 
                         <p>
-                            Testing the system with expanded search areas yielded encouraging results. As illustrated below, the system successfully pinpointed the correct location within an extensive area exceeding 210 square kilometers and encompassing nearly 100,000 buildings. In a real-world scenario, this system would be most effective when combined with inertial measurements and an optical flow pipeline to provide continuous relative position updates. While those methods provide continuous updates on the UAV's relative position, they suffer from drift over time. By providing periodic fixes on the UAV's absolute position, this system would effectively prevent drift from accumulating. 
+                            Testing the system with expanded search areas yielded encouraging results
+                            As illustrated below, the system successfully pinpointed the correct location within an extensive area exceeding 210 square kilometers and encompassing nearly 100,000 buildings
+                            In a real-world scenario, this system would be most effective when combined with inertial measurements and an optical flow pipeline to provide continuous relative position updates
+                            While those methods provide continuous updates on the UAV's relative position, they suffer from drift over time
+                            By providing periodic fixes on the UAV's absolute position, this system would effectively prevent drift from accumulating. 
                         </p>
 
                         <figure>
