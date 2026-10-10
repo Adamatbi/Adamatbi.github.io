@@ -55,7 +55,7 @@
                         <h3 class="article-inner-title">Vulnerability</h3>
         
                         <p>
-                            During a run, I devised a potential method allowing a malicious actor to discern the location of a protected address within a "hidden zone”. This attack only requires publicly available information. The vulnerability originates from Strava's practice of displaying the total distance of an activity to high precision, while redacting the GPS track inside the hidden zone. The activity can be divided into two segments: the visible distance and the hidden distance.
+                            During a run, I devised a potential method allowing a malicious actor to discern the location of a protected address within a "hidden zone". This attack only requires publicly available information. The vulnerability originates from Strava's practice of displaying the total distance of an activity to high precision, while redacting the GPS track inside the hidden zone. The activity can be divided into two segments: the visible distance and the hidden distance.
                           
             
         
@@ -73,10 +73,10 @@
                         <h3 class="article-inner-title">Implementation</h3>
         
                         <p>
-                            I began by gathering activity data, created an alternate account and randomly selected a residential address in Vancouver for my experiment. Strava permits a hidden zone radius ranging from 200 to 1600 meters, with 200 meters being the default choice. I opted for a 400-meter radius, accepting the first randomized offset presented.
+                            To gather activity data, I created an alternate account and randomly selected a residential address in Vancouver for my experiment. Strava permits a hidden zone radius ranging from 200 to 1600 meters, with 200 meters being the default choice. I opted for a 400-meter radius, accepting the first randomized offset presented.
         
                             <br><br>
-                            I conducted four running activities, each starting and ending just outside the chosen test address, heading in different cardinal directions. My objective was to gather data conducive to the attack while reflecting typical user activities. Running in varied directions and circling a local park before returning, ensured geographically spaced entry and exit points, aiding in triangulation. Additionally, I opted for relatively short distances of approximately 2km to reduce distance calculation errors. This setup models a scenario with a limited, nearly optimal sample set. Naturally, real-world data presents more variance, however, it is possible to compensate for this with more data.
+                            I conducted four running activities, each starting and ending just outside the chosen test address, heading in different cardinal directions. My objective was to gather data conducive to the attack while reflecting typical user activities. Running in varied directions and circling a local park before returning ensured geographically spaced entry and exit points, aiding in triangulation. Additionally, I opted for relatively short distances of approximately 2 kilometers to reduce distance calculation errors. This setup models a scenario with a limited, nearly optimal sample set. Naturally, real-world data presents more variance; however, it is possible to compensate for this with more data.
         
                         </p>
         
@@ -86,13 +86,13 @@
                         </figure>
         
                         <p>
-                            In reviewing the GPS logs, I anticipated discrepancies in matching my distance estimates with Strava's calculations; however, the results were surprisingly accurate. I managed to estimate a friend's 25km run within a 50-meter variance from Strava's calculation.
+                            In reviewing the GPS logs, I anticipated discrepancies in matching my distance estimates with Strava's calculations; however, the results were surprisingly accurate. I managed to estimate a friend's 25-kilometer run to within 50 meters of Strava's calculation.
         
                             <br><br>
-                            Subtracting the visible distance from the total distance for each of the four activities allowed me to derive estimates of the hidden distances. This yielded four sets of coordinates and their corresponding distances from the protected address. It's worth noting that a complication emerged in how the hidden distance was calculated; being the distance run rather than the straight-line distance between the activity's hidden zone entry point and the protected address. Since runners navigate street contours, calculating point-to-point distances requires prior knowledge of the street network.
+                            Subtracting the visible distance from the total distance for each of the four activities allowed me to derive estimates of the hidden distances. This yielded four sets of coordinates and their corresponding distances from the protected address. It's worth noting that a complication emerged in how the hidden distance was calculated: it is the distance run rather than the straight-line distance between the activity's hidden zone entry point and the protected address. Since runners navigate street contours, calculating point-to-point distances requires prior knowledge of the street network.
         
                             <br><br>
-                            To determine distances along city streets, I utilized OpenStreetMap—a free, open-source geographical database. Through OpenStreetMap data, I constructed a boundary delineating every geographic point within a specific walking distance from a starting point. This boundary encompasses all points reachable along city streets exactly that distance away from the start. By positioning the starting point at the edge of the hidden zone, the protected house should fall exactly on one of the boundary points.
+                            To determine distances along city streets, I utilized OpenStreetMap—a free, open-source geographical database. Through OpenStreetMap data, I constructed a boundary delineating every geographic point at a specific walking distance from a starting point. This boundary encompasses all points reachable along city streets exactly that distance away from the start. By positioning the starting point at the edge of the hidden zone, the protected house should fall exactly on one of the boundary points.
         
                         </p>
         
@@ -102,25 +102,26 @@
                         </figure>
         
                         <p>
-                            I repeated this process for all data and generated a map with varying colors for each activity. To pinpoint the protected house's location, I identified where all colors overlapped. Enclosing the smallest circle around a point where each color intersected precisely located the protected address. By using this method, the address was narrowed down to just a few houses.
+                            I repeated this process for all data and generated a map with varying colors for each activity. To pinpoint the protected house's location, I identified where all colors overlapped. Enclosing the smallest circle around a point where all colors intersected revealed the approximate location of the protected address. Using this method, I narrowed the address down to just a few houses.
         
                         </p>
         
                         <figure>
                             <img src="images/combined.png" alt="" class="article-image">
-                            <figcaption>Left: Possible home locations for each activity. Right: cluster outside protected address</figcaption>
+                            <figcaption>Left: Possible home locations for each activity. Right: Cluster outside protected address</figcaption>
                         </figure>
         
                         <h3 class="article-inner-title">Findings Disclosure</h3>
         
                         <p>
-                            Before publishing, I disclosed my findings to the security team at Strava and delayed publication by four months. In testing this I have only used data generated by myself.
+                            Before publishing, I disclosed my findings to the security team at Strava and delayed publication by four months. In testing this, I only used data I generated myself.
                             <br><br>
                             Lastly, right before publishing, I discovered a <a href="https://dl.acm.org/doi/pdf/10.1145/3548606.3560616">paper from KU Leuven in Belgium</a> outlining the same inference method used here. In it, they measure the effectiveness of the method using 1.4 million real-world activities.
                             <br><br><br>
                         </p>
         
-                </article>
+                    </article>
+                </div>
             </div>
         </div>
 
