@@ -231,7 +231,7 @@ body {
 }
 
 .ai-disclosure {
-    margin-left:5rem;
+    text-align: center;
     font-weight: normal;
     font-size: 0.4em;
     color: var(--dark-blue);
