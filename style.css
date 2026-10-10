@@ -227,11 +227,27 @@ body {
 .article-header{
     color: var(--dark-blue);
     text-align: center;
+    margin-bottom: 0rem;
+}
+
+.ai-disclosure {
+    margin-left:5rem;
+    font-weight: normal;
+    font-size: 0.4em;
+    color: var(--dark-blue);
+}
+
+.article-header:has(+ .ai-disclosure) h1 {
+    margin-bottom: 0;
+}
+
+.ai-disclosure h1 {
+    margin-top: 0.25rem;
 }
 
 .article-inner-title {
     color: var(--dark-blue);
-    margin-left:1rem;
+    margin-left:0rem;
 }
 
 .article-content {
